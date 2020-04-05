@@ -13,6 +13,7 @@ import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.CaptureManager
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
 import com.journeyapps.barcodescanner.ViewfinderView
+import kotlinx.android.synthetic.main.custom_barcode_scanner.*
 
 abstract class ScanQRFragment<T : BasePresenter<*>> : WolmoFragment<T>(), ScanQRView, DecoratedBarcodeView.TorchListener {
 
@@ -20,7 +21,6 @@ abstract class ScanQRFragment<T : BasePresenter<*>> : WolmoFragment<T>(), ScanQR
 
     private var capture: CaptureManager? = null
     private var barcodeScannerView: DecoratedBarcodeView? = null
-    private var viewfinderView: ViewfinderView? = null
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +39,6 @@ abstract class ScanQRFragment<T : BasePresenter<*>> : WolmoFragment<T>(), ScanQR
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewfinderView = scanQRView.viewFinderView()
         barcodeScannerView = scanQRView.decoratedBarcodeView().apply { setTorchListener(this@ScanQRFragment) }
         capture = CaptureManager(requireActivity(), barcodeScannerView!!).apply {
             initializeFromIntent(requireActivity().intent, savedInstanceState)
@@ -69,6 +68,10 @@ abstract class ScanQRFragment<T : BasePresenter<*>> : WolmoFragment<T>(), ScanQR
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         capture?.onSaveInstanceState(outState)
+    }
+
+    protected fun onViewfinderViewVisibility(status: Int) {
+        zxing_viewfinder_view.visibility = status
     }
 
     override fun onTorchOn() { /*ON FLASH ON*/ }
