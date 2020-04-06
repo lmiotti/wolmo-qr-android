@@ -36,7 +36,8 @@ abstract class ScanQRFragment<T : BasePresenter<*>> : WolmoFragment<T>(), ScanQR
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        barcodeScannerView = scanQRView.decoratedBarcodeView().apply { setTorchListener(this@ScanQRFragment) }
+        barcodeScannerView = (view.findViewById(scanQRView.decoratedBarcodeView()) as DecoratedBarcodeView)
+            .apply { setTorchListener(this@ScanQRFragment) }
         capture = CaptureManager(requireActivity(), barcodeScannerView!!).apply {
             initializeFromIntent(requireActivity().intent, savedInstanceState)
             decode()

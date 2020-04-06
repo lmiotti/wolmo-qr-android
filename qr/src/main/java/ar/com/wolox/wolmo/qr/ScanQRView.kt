@@ -5,7 +5,7 @@ import com.journeyapps.barcodescanner.ViewfinderView
 
 internal interface ScanQRView {
 
-    fun decoratedBarcodeView(): DecoratedBarcodeView
+    fun decoratedBarcodeView(): Int
 
     fun onResultCanceled()
 
