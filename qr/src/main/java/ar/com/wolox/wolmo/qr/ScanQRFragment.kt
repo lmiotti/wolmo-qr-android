@@ -1,18 +1,15 @@
 package ar.com.wolox.wolmo.core.qr
 
-import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.CallSuper
-import androidx.annotation.RequiresApi
 import ar.com.wolox.wolmo.core.fragment.WolmoFragment
 import ar.com.wolox.wolmo.core.presenter.BasePresenter
 import com.google.zxing.integration.android.IntentIntegrator
 import com.journeyapps.barcodescanner.CaptureManager
 import com.journeyapps.barcodescanner.DecoratedBarcodeView
-import com.journeyapps.barcodescanner.ViewfinderView
 import kotlinx.android.synthetic.main.custom_barcode_scanner.*
 
 abstract class ScanQRFragment<T : BasePresenter<*>> : WolmoFragment<T>(), ScanQRView, DecoratedBarcodeView.TorchListener {
